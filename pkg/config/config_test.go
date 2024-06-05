@@ -68,8 +68,6 @@ func TestNew(t *testing.T) {
 	c.ProjectDefaults.Pull.Refs.Tags.ExcludeDeleted = true
 
 	c.ProjectDefaults.Pull.Pipeline.Jobs.FromChildPipelines.Enabled = true
-	c.ProjectDefaults.Pull.Pipeline.Jobs.RunnerDescription.Enabled = true
-	c.ProjectDefaults.Pull.Pipeline.Jobs.RunnerDescription.AggregationRegexp = `shared-runners-manager-(\d*)\.gitlab\.com`
 	c.ProjectDefaults.Pull.Pipeline.Variables.Regexp = `.*`
 
 	assert.Equal(t, c, New())

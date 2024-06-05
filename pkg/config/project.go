@@ -110,23 +110,12 @@ type ProjectPullPipelineJobs struct {
 	// Pull pipeline jobs from child/downstream pipelines.
 	FromChildPipelines ProjectPullPipelineJobsFromChildPipelines `yaml:"from_child_pipelines"`
 
-	// Configure the export of the runner description which ran the job.
-	RunnerDescription ProjectPullPipelineJobsRunnerDescription `yaml:"runner_description"`
 }
 
 // ProjectPullPipelineJobsFromChildPipelines ..
 type ProjectPullPipelineJobsFromChildPipelines struct {
 	// Enabled set to true will pull pipeline jobs from child/downstream pipelines related metrics.
 	Enabled bool `default:"true" yaml:"enabled"`
-}
-
-// ProjectPullPipelineJobsRunnerDescription ..
-type ProjectPullPipelineJobsRunnerDescription struct {
-	// Enabled set to true will export the description of the runner which ran the job.
-	Enabled bool `default:"true" yaml:"enabled"`
-
-	// Regular expression to be able to reduce the cardinality of the exported value when necessary.
-	AggregationRegexp string `default:"shared-runners-manager-(\\d*)\\.gitlab\\.com" yaml:"aggregation_regexp"`
 }
 
 // ProjectPullPipelineVariables ..

@@ -21,7 +21,6 @@ func TestNewJob(t *testing.T) {
 		QueuedDuration: 10,
 		Status:         "failed",
 		Stage:          "🚀",
-		TagList:        []string{"test-tag"},
 		Runner: struct {
 			ID          int    "json:\"id\""
 			Description string "json:\"description\""
@@ -54,7 +53,6 @@ func TestNewJob(t *testing.T) {
 		DurationSeconds:       15,
 		QueuedDurationSeconds: 10,
 		Status:                "failed",
-		TagList:               "test-tag",
 		ArtifactSize:          150,
 
 		Runner: Runner{

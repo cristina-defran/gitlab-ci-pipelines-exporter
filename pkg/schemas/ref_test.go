@@ -53,10 +53,8 @@ func TestNewRef(t *testing.T) {
 	p.OutputSparseStatusMetrics = false
 	p.Pull.Pipeline.Jobs.Enabled = true
 	p.Pull.Pipeline.Jobs.FromChildPipelines.Enabled = false
-	p.Pull.Pipeline.Jobs.RunnerDescription.Enabled = false
 	p.Pull.Pipeline.Variables.Enabled = true
 	p.Pull.Pipeline.Variables.Regexp = `.*`
-	p.Pull.Pipeline.Jobs.RunnerDescription.AggregationRegexp = `.*`
 
 	expectedValue := Ref{
 		Project:    p,

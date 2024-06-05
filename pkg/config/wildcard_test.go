@@ -23,8 +23,6 @@ func TestNewWildcard(t *testing.T) {
 	w.Pull.Refs.Tags.ExcludeDeleted = true
 
 	w.Pull.Pipeline.Jobs.FromChildPipelines.Enabled = true
-	w.Pull.Pipeline.Jobs.RunnerDescription.Enabled = true
-	w.Pull.Pipeline.Jobs.RunnerDescription.AggregationRegexp = `shared-runners-manager-(\d*)\.gitlab\.com`
 	w.Pull.Pipeline.Variables.Regexp = `.*`
 
 	assert.Equal(t, w, NewWildcard())

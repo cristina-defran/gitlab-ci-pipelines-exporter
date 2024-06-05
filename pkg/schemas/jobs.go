@@ -1,8 +1,6 @@
 package schemas
 
 import (
-	"strings"
-
 	goGitlab "github.com/xanzy/go-gitlab"
 )
 
@@ -15,9 +13,7 @@ type Job struct {
 	DurationSeconds       float64
 	QueuedDurationSeconds float64
 	Status                string
-	TagList               string
 	ArtifactSize          float64
-	FailureReason         string
 	Runner                Runner
 }
 
@@ -52,9 +48,7 @@ func NewJob(gj goGitlab.Job) Job {
 		DurationSeconds:       gj.Duration,
 		QueuedDurationSeconds: gj.QueuedDuration,
 		Status:                gj.Status,
-		TagList:               strings.Join(gj.TagList, ","),
 		ArtifactSize:          artifactSize,
-		FailureReason:         gj.FailureReason,
 
 		Runner: Runner{
 			Description: gj.Runner.Description,

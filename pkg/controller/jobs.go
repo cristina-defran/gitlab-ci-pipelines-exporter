@@ -53,27 +53,6 @@ func (c *Controller) ProcessJobMetrics(ctx context.Context, ref schemas.Ref, job
 	labels := ref.DefaultLabelsValues()
 	labels["stage"] = job.Stage
 	labels["job_name"] = job.Name
-	labels["tag_list"] = job.TagList
-	labels["failure_reason"] = job.FailureReason
-
-	if ref.Project.Pull.Pipeline.Jobs.RunnerDescription.Enabled {
-		re, err := regexp.Compile(ref.Project.Pull.Pipeline.Jobs.RunnerDescription.AggregationRegexp)
-		if err != nil {
-			log.WithContext(ctx).
-				WithFields(projectRefLogFields).
-				WithError(err).
-				Error("invalid job runner description aggregation regexp")
-		}
-
-		if re.MatchString(job.Runner.Description) {
-			labels["runner_description"] = ref.Project.Pull.Pipeline.Jobs.RunnerDescription.AggregationRegexp
-		} else {
-			labels["runner_description"] = job.Runner.Description
-		}
-	} else {
-		// TODO: Figure out how to completely remove it from the exporter instead of keeping it empty
-		labels["runner_description"] = ""
-	}
 
 	// Refresh ref state from the store
 	if err := c.Store.GetRef(ctx, &ref); err != nil {

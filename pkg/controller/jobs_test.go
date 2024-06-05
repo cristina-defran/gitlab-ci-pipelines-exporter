@@ -78,7 +78,6 @@ func TestProcessJobMetrics(t *testing.T) {
 		DurationSeconds: 15,
 		Status:          "failed",
 		Stage:           "🚀",
-		TagList:         "",
 		ArtifactSize:    150,
 		Runner: schemas.Runner{
 			Description: "foo-123-bar",
@@ -87,7 +86,6 @@ func TestProcessJobMetrics(t *testing.T) {
 
 	p := schemas.NewProject("foo")
 	p.Topics = "first,second"
-	p.Pull.Pipeline.Jobs.RunnerDescription.AggregationRegexp = `foo-(.*)-bar`
 
 	ref := schemas.NewRef(p, schemas.RefKindBranch, "foo")
 	ref.LatestPipeline.ID = 1
@@ -115,17 +113,14 @@ func TestProcessJobMetrics(t *testing.T) {
 	// Check if all the metrics exist
 	metrics, _ := c.Store.Metrics(ctx)
 	labels := map[string]string{
-		"project":            ref.Project.Name,
-		"topics":             ref.Project.Topics,
-		"ref":                ref.Name,
-		"kind":               string(ref.Kind),
-		"variables":          ref.LatestPipeline.Variables,
-		"source":             ref.LatestPipeline.Source,
-		"stage":              newJob.Stage,
-		"tag_list":           newJob.TagList,
-		"failure_reason":     newJob.FailureReason,
-		"job_name":           newJob.Name,
-		"runner_description": ref.Project.Pull.Pipeline.Jobs.RunnerDescription.AggregationRegexp,
+		"project":   ref.Project.Name,
+		"topics":    ref.Project.Topics,
+		"ref":       ref.Name,
+		"kind":      string(ref.Kind),
+		"variables": ref.LatestPipeline.Variables,
+		"source":    ref.LatestPipeline.Source,
+		"stage":     newJob.Stage,
+		"job_name":  newJob.Name,
 	}
 
 	lastJobRunID := schemas.Metric{
